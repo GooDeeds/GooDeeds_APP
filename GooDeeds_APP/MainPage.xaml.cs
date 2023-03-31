@@ -9,7 +9,9 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-	}
+        InitializeNotification();
+
+    }
 
 	private void OnCounterClicked(object sender, EventArgs e)
 	{
@@ -20,24 +22,31 @@ public partial class MainPage : ContentPage
 		else
 			CounterBtn.Text = $"Clicked {count} times";
 
+        SemanticScreenReader.Announce(CounterBtn.Text);
+	}
+
+	private void InitializeNotification()
+	{
 #if ANDROID || IOS
+
+        var cDT = DateTime.Now;
+
         var request = new NotificationRequest
         {
             NotificationId = 1000,
-            Title = "Subscribe for me",
-            Subtitle = "Hello Friends",
-            Description = "Stay Tuned",
+            Title = "Do something good",
+            Subtitle = "",
+            Description = "Its time for a good deed today!",
             BadgeNumber = 42,
             Schedule = new NotificationRequestSchedule
             {
-                NotifyTime = DateTime.Now.AddSeconds(5),
-                NotifyRepeatInterval = TimeSpan.FromDays(1)
+                NotifyTime = new DateTime(cDT.Year, cDT.Month, cDT.Day, 12, 00, 0).AddDays(1),
+                NotifyRepeatInterval = TimeSpan.FromHours(24),
+                RepeatType = NotificationRepeat.TimeInterval
             }
         };
         LocalNotificationCenter.Current.Show(request);
 #endif
-
-        SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+    }
 }
 
