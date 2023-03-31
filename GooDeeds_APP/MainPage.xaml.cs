@@ -1,4 +1,5 @@
-﻿using Plugin.LocalNotification;
+﻿using Microsoft.Extensions.Configuration;
+using Plugin.LocalNotification;
 
 namespace GooDeeds_APP;
 
@@ -6,11 +7,13 @@ public partial class MainPage : ContentPage
 {
 	int count = 0;
 
-	public MainPage()
+	public MainPage(IConfiguration config)
 	{
 		InitializeComponent();
         InitializeNotification();
 
+        var Settings = config.GetRequiredSection("Settings").Get<Settings>();
+        var s = Settings.API_Server_URL;
     }
 
 	private void OnCounterClicked(object sender, EventArgs e)

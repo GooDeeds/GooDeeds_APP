@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using System.Reflection;
 
 namespace GooDeeds_APP;
 
@@ -15,10 +17,18 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
+		var assembly = Assembly.GetExecutingAssembly();
+		using (var stream = assembly.GetManifestResourceStream("GooDeeds_APP.appsettings.json"))
+		{
+			var config = new ConfigurationBuilder().AddJsonStream(stream).Build();
+			builder.Configuration.AddConfiguration(config);
+		}
+
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
 
+		builder.Services.AddTransient<MainPage>();
 		return builder.Build();
 	}
 }
