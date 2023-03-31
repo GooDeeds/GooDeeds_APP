@@ -1,4 +1,6 @@
-﻿namespace GooDeeds_APP;
+﻿using Plugin.LocalNotification;
+
+namespace GooDeeds_APP;
 
 public partial class MainPage : ContentPage
 {
@@ -18,7 +20,24 @@ public partial class MainPage : ContentPage
 		else
 			CounterBtn.Text = $"Clicked {count} times";
 
-		SemanticScreenReader.Announce(CounterBtn.Text);
+#if ANDROID || IOS
+        var request = new NotificationRequest
+        {
+            NotificationId = 1000,
+            Title = "Subscribe for me",
+            Subtitle = "Hello Friends",
+            Description = "Stay Tuned",
+            BadgeNumber = 42,
+            Schedule = new NotificationRequestSchedule
+            {
+                NotifyTime = DateTime.Now.AddSeconds(5),
+                NotifyRepeatInterval = TimeSpan.FromDays(1)
+            }
+        };
+        LocalNotificationCenter.Current.Show(request);
+#endif
+
+        SemanticScreenReader.Announce(CounterBtn.Text);
 	}
 }
 
