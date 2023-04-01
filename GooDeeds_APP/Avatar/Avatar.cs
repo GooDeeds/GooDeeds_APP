@@ -19,5 +19,7 @@ namespace GooDeeds_APP.Avatar
         public Profession Profession { get; set; }
 
         public uint Level => AvatarManager.GetLevel(Experience);
+
+        List<QuestHistoryEntry> QuestHistory { get; set; } = new List<QuestHistoryEntry>();
     }
 }
