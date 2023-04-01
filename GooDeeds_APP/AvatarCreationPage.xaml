@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GooDeeds_APP.AvatarCreationPage"
+             Title="AvatarCreationPage">
+    <VerticalStackLayout>
+        <Label 
+            Text="Create your Avatar"
+            VerticalOptions="Start"
+            HorizontalOptions="Center" />
+
+        <Entry x:Name="uname"
+        Placeholder="Username"
+        MaxLength="32"
+        />
+
+        <Picker
+            Title="Race"
+            ItemsSource="{Binding RaceList}"
+            x:Name="RacePicker"
+            SelectedIndexChanged="RacePicker_SelectedIndexChanged"/>
+
+        <Picker
+            Title="Profession"
+            ItemsSource="{Binding ProfessionList}"
+            x:Name="ProfessionPicker"/>
+
+        <Button Text="Create Character"
+                Clicked="Button_Clicked"/>
+
+
+        <StackLayout Margin="20">
+            <Image x:Name="RaceImage"
+                    Opacity="0"
+                    Margin="20"/>
+
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>

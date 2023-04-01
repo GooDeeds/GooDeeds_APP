@@ -29,7 +29,7 @@
         </StackLayout>
 
 
-        <ScrollView Grid.Row="2" BackgroundColor="Beige">
+        <ScrollView Grid.Row="2" BackgroundColor="Black">
             <VerticalStackLayout
             Spacing="25"
             VerticalOptions="Center">
@@ -38,14 +38,13 @@
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout Spacing="10" BackgroundColor="Red">
-                                    <Label Text="{Binding Title}" FontSize="24" />
+                                    <Label Text="{Binding Title}" FontSize="18" />
                                     <Label Text="{Binding Description}" FontSize="16" />
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-
             </VerticalStackLayout>
         </ScrollView>
     </Grid>
