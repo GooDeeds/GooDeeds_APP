@@ -8,6 +8,7 @@ namespace GooDeeds_APP.Avatar
         public static string AvatarFileName => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "avatar.json");
 
         public static bool AvatarExists => File.Exists(AvatarFileName);
+        private static Avatar _cachedAvatar = null;
 
         public static Avatar LoadAvatar()
         {
@@ -15,8 +16,12 @@ namespace GooDeeds_APP.Avatar
             {
                 if (AvatarExists)
                 {
+                    if (_cachedAvatar != null) return _cachedAvatar;
                     var json = File.ReadAllText(AvatarFileName);
-                    return JsonConvert.DeserializeObject<Avatar>(json);
+                    var avatar = JsonConvert.DeserializeObject<Avatar>(json);
+                    avatar.PopulateQuestHistory();
+                    _cachedAvatar = avatar;
+                    return avatar;
                 }
                 else
                 {
@@ -96,8 +101,16 @@ namespace GooDeeds_APP.Avatar
         }
         public static uint GetLevel(uint experience)
         {
-            double level = Math.Floor(Math.Log(experience / BaseExperience) / Math.Log(GrowthRate)) + 1;
+            double level = Math.Floor(Math.Pow(experience / BaseExperience, 1 / GrowthRate));
             return (uint)level;
+        }
+
+        public static double GetLevelProgress(uint experience)
+        {
+            uint level = GetLevel(experience);
+            uint levelExperience = GetNeededExperience(level);
+            uint nextLevelExperience = GetNeededExperience(level + 1);
+            return (experience - levelExperience) / (double)(nextLevelExperience - levelExperience);
         }
     }
 }

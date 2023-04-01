@@ -8,6 +8,7 @@ namespace GooDeeds_APP.Avatar
 {
     public class QuestHistoryEntry
     {
+        public int DeedId { get; set; }
         public uint EarnedExperience { get; set; }
 
         public DateTime CompletedAt { get; set; }

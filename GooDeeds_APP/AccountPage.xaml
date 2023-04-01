@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GooDeeds_APP.AccountPage"
+             Title="AccountPage">
+    <VerticalStackLayout>
+       
+
+        <StackLayout Margin="25">
+            <Label x:Name="GreetingsText" FontAttributes="Bold" FontSize="Large"/>
+            <Image x:Name="AvatarImage" Margin="0,20" WidthRequest="200"></Image>
+            <ProgressBar x:Name="ProgressBar" Progress="0.4"></ProgressBar>
+            <Grid
+                Margin="0,0,0,50">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="ExperienceText" Grid.Row="0" Grid.Column="1" Text="100/100" HorizontalOptions="EndAndExpand"/>
+                <Label x:Name="LevelText" Grid.Row="0" Grid.Column="0" Text="Level 1" HorizontalOptions="StartAndExpand"/>
+            </Grid>
+            <Button Clicked="Settings_Clicked"
+                    Text="Settings"
+                    BackgroundColor="Beige"
+                    Margin="0,0,0,10"/>
+            <Button Clicked="HistoryButton_Clicked"
+                    Text="Quest Histroy"
+                    BackgroundColor="Beige"
+                    Margin="0,0,0,10"/>
+            <Button Opacity="0"
+                    Text="Achievements"
+                    BackgroundColor="Beige"
+                    Margin="0,0,0,10"/>
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>

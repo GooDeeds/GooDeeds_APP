@@ -27,14 +27,14 @@
             </Frame>
         </StackLayout>
         <SearchBar Placeholder="Search Deed..."
-                   TextChanged="SearchBar_TextChanged"
+                   SearchButtonPressed="SearchBar_SearchButtonPressed"
                    x:Name="SearchBar"/>
 
 
         <ScrollView Grid.Row="2" BackgroundColor="Black">
             <VerticalStackLayout
                 Spacing="25"
-                VerticalOptions="Center">
+                VerticalOptions="StartAndExpand">
                 <ListView ItemsSource="{Binding Deeds}"  
                           x:Name="DeedList"
                           HasUnevenRows="True"

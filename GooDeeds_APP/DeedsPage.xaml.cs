@@ -36,10 +36,14 @@ public partial class DeedPage : ContentPage
             {
                 foreach (var d in Deeds.Where(deed => deed.Title.ToLower().Contains(SearchBar.Text.ToLower())))
                 {
+                    if (FilteredDeeds.Contains(d))
+                        continue;
                     FilteredDeeds.Add(d);
                 }
                 foreach (var d in Deeds.Where(deed => deed.Description.ToLower().Contains(SearchBar.Text.ToLower())))
                 {
+                    if (FilteredDeeds.Contains(d))
+                        continue;
                     FilteredDeeds.Add(d);
                 }
             }
@@ -203,11 +207,6 @@ public partial class DeedPage : ContentPage
         AnimateInfoBox(false);
     }
 
-    private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
-    {
-        FilterDeeds();
-    }
-
     private async void DeedList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
         if (Parent is TabbedPage tp && tp.Parent is NavigationPage np && e.SelectedItem is Deed d)
@@ -217,5 +216,10 @@ public partial class DeedPage : ContentPage
             dip.SetDeed(d);
             await np.PushAsync(dip);
         }
+    }
+
+    private void SearchBar_SearchButtonPressed(object sender, EventArgs e)
+    {
+        FilterDeeds();
     }
 }
