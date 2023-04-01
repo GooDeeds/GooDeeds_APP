@@ -87,5 +87,17 @@ namespace GooDeeds_APP.Avatar
 
             return sb.ToString();
         }
+
+        public const uint BaseExperience = 50;
+        public const double GrowthRate = 1.5;
+        public static uint GetNeededExperience(uint level)
+        {
+            return BaseExperience * (uint)Math.Pow(level, GrowthRate);
+        }
+        public static uint GetLevel(uint experience)
+        {
+            double level = Math.Floor(Math.Log(experience / BaseExperience) / Math.Log(GrowthRate)) + 1;
+            return (uint)level;
+        }
     }
 }
