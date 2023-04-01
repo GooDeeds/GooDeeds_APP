@@ -10,11 +10,13 @@ namespace GooDeeds_APP.Deeds
 {
     public delegate void DeedManagerDownloadErrorEventHandler(int statusCode, string errorMessage);
     public delegate void DeedManagerDownloadSuccessventHandler();
+    public delegate void DeedManagerDownloadStartedHandler();
 
     public static class DeedManager
     {
         public static event DeedManagerDownloadErrorEventHandler OnDeedDownloadError;
         public static event DeedManagerDownloadSuccessventHandler OnDeedDownloadSuccess;
+        public static event DeedManagerDownloadStartedHandler OnDeedDownloadStart;
 
         // The File will be a file in the internal storage of the device (it is only accessable by the app itself)!
         public static string DeedsFileName => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "deeds.json");
@@ -31,6 +33,7 @@ namespace GooDeeds_APP.Deeds
 
             try
             {
+                OnDeedDownloadStart?.Invoke();
                 HttpClient client = new HttpClient();
                 HttpResponseMessage message = await client.GetAsync(API_Url + "/deed");
 

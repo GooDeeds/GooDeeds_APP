@@ -20,11 +20,6 @@ public partial class MainPage : ContentPage
 
     private void InitializeDeedDownload(string API_Url)
     {
-        AnimateInfoBox(true);
-        // Download newest Deeds!
-        SetInfoBoxText("Downloading new Deeds!", true);
-        AnimateInfoBox(true);
-
         new Thread(async () => await DeedManager.UpdateDeeds(API_Url)).Start();
     }
 
@@ -32,12 +27,6 @@ public partial class MainPage : ContentPage
     {
         DeedDownloadLabel.Text = text;
         DeedDownloadFrame.BackgroundColor = isGood ? Colors.ForestGreen : Colors.IndianRed;
-    }
-    
-    private void DeedDownloadSuccess()
-    {
-        SetInfoBoxText("Downloaded newest Deeds!", true);
-        HideInfoBox(3000);
     }
 
     private void HideInfoBox(int afterMilliseconds = 0)
@@ -55,6 +44,12 @@ public partial class MainPage : ContentPage
         }
     }
 
+    private void DeedDownloadSuccess()
+    {
+        SetInfoBoxText("Downloaded newest Deeds!", true);
+        HideInfoBox(3000);
+    }
+
     private void DeedDownloadError(int statusCode, string errorMessage)
     {
         // Check if the code != -1 (which means that the Deed was not downloaded because our cache is still pretty new).
@@ -67,6 +62,14 @@ public partial class MainPage : ContentPage
             SetInfoBoxText("Downloaded newest Deeds!", true);
             HideInfoBox(3000);
         }
+    }
+
+    private void DeedDownloadStart()
+    {
+        AnimateInfoBox(true);
+        // Download newest Deeds!
+        SetInfoBoxText("Downloading new Deeds!", true);
+        AnimateInfoBox(true);
     }
 
     // A simple animation to show or hide the info box. (at the top of the screen)
@@ -130,7 +133,7 @@ public partial class MainPage : ContentPage
     {
         DeedManager.OnDeedDownloadError += DeedDownloadError;
         DeedManager.OnDeedDownloadSuccess += DeedDownloadSuccess;
-
+        DeedManager.OnDeedDownloadStart += DeedDownloadStart;
         var Settings = config.GetRequiredSection("Settings").Get<Settings>();
         InitializeDeedDownload(Settings.API_Server_URL);
     }
@@ -145,6 +148,7 @@ public partial class MainPage : ContentPage
     {
         DeedManager.OnDeedDownloadError -= DeedDownloadError;
         DeedManager.OnDeedDownloadSuccess -= DeedDownloadSuccess;
+        DeedManager.OnDeedDownloadStart -= DeedDownloadStart;
         AnimateInfoBox(true);
     }
 }
