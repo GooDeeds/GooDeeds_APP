@@ -7,6 +7,7 @@ namespace GooDeeds_APP;
 
 public partial class MainPage : ContentPage
 {
+    public List<Deed> Deeds { get; private set; }
     IConfiguration config;
 	int count = 0;
 
@@ -16,11 +17,17 @@ public partial class MainPage : ContentPage
         InitializeNotification();
 
         this.config = config;
+        Deeds = DeedManager.GetAllDeeds();
+        BindingContext = new { Deeds = Deeds };
     }
 
     private void InitializeDeedDownload(string API_Url)
     {
-        new Thread(async () => await DeedManager.UpdateDeeds(API_Url)).Start();
+        new Thread(async () =>
+        {
+            Thread.Sleep(2000);
+            await DeedManager.UpdateDeeds(API_Url);
+        }).Start();
     }
 
     private void SetInfoBoxText(string text, bool isGood)
@@ -39,42 +46,62 @@ public partial class MainPage : ContentPage
             new Thread(() =>
             {
                 Thread.Sleep(afterMilliseconds);
-                AnimateInfoBox(false);
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    AnimateInfoBox(false);
+                });
             }).Start();
         }
     }
 
     private void DeedDownloadSuccess()
     {
-        SetInfoBoxText("Downloaded newest Deeds!", true);
-        HideInfoBox(3000);
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            Deeds = DeedManager.GetAllDeeds();
+            SetInfoBoxText("Downloaded newest Deeds!", true);
+            HideInfoBox(3000);
+        });
     }
 
     private void DeedDownloadError(int statusCode, string errorMessage)
     {
-        // Check if the code != -1 (which means that the Deed was not downloaded because our cache is still pretty new).
-        if (statusCode != -1)
+        // We did create a thread to download data.
+        // Thus we cannot modify elements (only the thread where they got created can edit them, which is the mainthread in our case)
+        // So we need to invoke the final results and UI-Changes on the mainthread.
+        MainThread.BeginInvokeOnMainThread(() =>
         {
-            SetInfoBoxText("Ohh noo. There was a problem while downloading the newest deeds.", false);
-            HideInfoBox(5000);
-        } else
-        {
-            SetInfoBoxText("Downloaded newest Deeds!", true);
-            HideInfoBox(3000);
-        }
+            // Check if the code != -1 (which means that the Deed was not downloaded because our cache is still pretty new).
+            if (statusCode != -1)
+            {
+                SetInfoBoxText("Ohh noo. There was a problem while downloading the newest deeds.", false);
+                HideInfoBox(5000);
+            }
+            else
+            {
+                SetInfoBoxText("Downloaded newest Deeds!", true);
+                HideInfoBox(3000);
+            }
+        });
     }
 
     private void DeedDownloadStart()
     {
-        AnimateInfoBox(true);
-        // Download newest Deeds!
-        SetInfoBoxText("Downloading new Deeds!", true);
-        AnimateInfoBox(true);
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            AnimateInfoBox(true);
+            // Download newest Deeds!
+            SetInfoBoxText("Downloading new Deeds!", true);
+        });
     }
 
     // A simple animation to show or hide the info box. (at the top of the screen)
     private async void AnimateInfoBox(bool isAppearing)
     {
+        // If we're already hidden (or shown) dont update the visibility at all. This just makes things weird and glitchy
+        if (isAppearing && infoBoxContainer.Opacity == 1 || !isAppearing && infoBoxContainer.Opacity == 0)
+            return;
+
         // if we want it to appear, than the animation shold go from top to bottom.
         // Otherwise (we want it to hide) it should go from bottom to top
         double startY = isAppearing ? -infoBoxContainer.Height : 0;
@@ -86,18 +113,6 @@ public partial class MainPage : ContentPage
         await infoBoxContainer.TranslateTo(0, endY, 250, Easing.SinOut);
         infoBoxContainer.Opacity = isAppearing ? 1 : 0;
     }
-
-    private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
-
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-        SemanticScreenReader.Announce(CounterBtn.Text);
-	}
 
 	private void InitializeNotification()
 	{
@@ -149,7 +164,7 @@ public partial class MainPage : ContentPage
         DeedManager.OnDeedDownloadError -= DeedDownloadError;
         DeedManager.OnDeedDownloadSuccess -= DeedDownloadSuccess;
         DeedManager.OnDeedDownloadStart -= DeedDownloadStart;
-        AnimateInfoBox(true);
+        AnimateInfoBox(false);
     }
 }
 
