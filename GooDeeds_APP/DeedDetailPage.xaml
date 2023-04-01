@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GooDeeds_APP.DeedDetailPage"
+             Title="DeedDetailPage">
+    <StackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" Source="dotnet_bot.svg" HeightRequest="30" WidthRequest="30"/>
+            <Label Grid.Column="1" x:Name="TitleText"/>
+        </Grid>
+        <Label x:Name="DescriptionText"/>
+        <StackLayout BackgroundColor="LightGray" Padding="10" Margin="10, 0, 10, 0">
+            <Label Text="Info-box title" FontAttributes="Bold" />
+            <Label Text="Additional statistics" FontSize="Small" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

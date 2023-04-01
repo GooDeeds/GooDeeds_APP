@@ -5,6 +5,4 @@
              xmlns:local="clr-namespace:GooDeeds_APP;assembly=GooDeeds_APP"
              x:Class="GooDeeds_APP.MainPage">
     <local:DeedPage/>
-    <local:IntroductionPage/>
-    <local:AvatarCreationPage/>
 </TabbedPage>

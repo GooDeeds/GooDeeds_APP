@@ -207,4 +207,15 @@ public partial class DeedPage : ContentPage
     {
         FilterDeeds();
     }
+
+    private async void DeedList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        if (Parent is TabbedPage tp && tp.Parent is NavigationPage np && e.SelectedItem is Deed d)
+        {
+            DeedList.SelectedItem = null;
+            DeedDetailPage dip = new DeedDetailPage();
+            dip.SetDeed(d);
+            await np.PushAsync(dip);
+        }
+    }
 }

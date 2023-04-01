@@ -72,7 +72,10 @@
 	  <MauiXaml Update="AvatarCreationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="DeedPage.xaml">
+	  <MauiXaml Update="DeedDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="DeedsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="IntroductionPage.xaml">
@@ -82,6 +85,12 @@
 
 	<ItemGroup>
 	  <Folder Include="Achievements\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="DeedsPage.xaml.cs">
+	    <DependentUpon>DeedsPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

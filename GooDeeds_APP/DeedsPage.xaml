@@ -37,7 +37,8 @@
                 VerticalOptions="Center">
                 <ListView ItemsSource="{Binding Deeds}"  
                           x:Name="DeedList"
-                          HasUnevenRows="True">
+                          HasUnevenRows="True"
+                          ItemSelected="DeedList_ItemSelected">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
