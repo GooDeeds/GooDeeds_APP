@@ -45,6 +45,6 @@ public partial class IntroductionPage : ContentPage
 
     private async void btn_continue_Clicked(object sender, EventArgs e)
     {
-        await this.Navigation.PopAsync();
+        App.UpdateMainPage();
     }
 }

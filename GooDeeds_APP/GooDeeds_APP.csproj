@@ -49,6 +49,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Achievements\NewFile1.txt" />
 	  <None Remove="appsettings.json" />
 	  <None Remove="NewFile1.txt" />
 	</ItemGroup>
@@ -71,9 +72,16 @@
 	  <MauiXaml Update="AvatarCreationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="DeedPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="IntroductionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Achievements\" />
 	</ItemGroup>
 
 </Project>

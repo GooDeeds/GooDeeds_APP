@@ -1,3 +1,5 @@
+using GooDeeds_APP.Avatar;
+
 namespace GooDeeds_APP;
 
 public partial class AvatarCreationPage : ContentPage
@@ -17,28 +19,47 @@ public partial class AvatarCreationPage : ContentPage
         };
 	}
 
-	public void CreateAvatar()
-	{
-		profession = new Avatar.Profession()
+	public async void CreateAvatar()
+    {
+        if (string.IsNullOrEmpty(uname.Text))
+        {
+            await DisplayAlert("Error", "Please enter a name", "OK");
+            return;
+        }
+        if (ProfessionPicker.SelectedIndex == -1)
+        {
+            await DisplayAlert("Error", "Please select a race.", "OK");
+            return;
+        }
+        if (RacePicker.SelectedIndex == -1)
+        {
+            await DisplayAlert("Error", "Please select a profession.", "OK");
+            return;
+        }
+
+        profession = new Avatar.Profession()
 		{
-			Type = (Avatar.ProfessionType)ProfessionPicker.SelectedItem,
-			Race = (Avatar.RaceType)RacePicker.SelectedItem,
+			Type = (Avatar.ProfessionType)(ProfessionPicker.SelectedIndex + 1),
+			Race = (Avatar.RaceType)(RacePicker.SelectedIndex + 1),
 		};
 
 		avatar = new Avatar.Avatar()
 		{
+            Profession = profession,
 			Name = uname.Text,
 			Experience = 0,
 		};
+        
+        Avatar.AvatarManager.SaveAvatar(avatar);
+        App.UpdateMainPage();
+    }
 
-		try
-		{
-            Avatar.AvatarManager.SaveAvatar(avatar);
-        }
-        catch (Exception ex)
-		{
+    private void UpdateDescriptionText()
+    {
+        if (RacePicker.SelectedIndex <= -1 || ProfessionPicker.SelectedIndex <= -1)
+            return;
 
-        }
+        CharacterDescriptionText.Text = AvatarManager.GetDescription((RaceType)(RacePicker.SelectedIndex + 1), (ProfessionType)(ProfessionPicker.SelectedIndex + 1));
     }
 
     private void RacePicker_SelectedIndexChanged(object sender, EventArgs e)
@@ -52,10 +73,21 @@ public partial class AvatarCreationPage : ContentPage
             RaceImage.Opacity = 0;
             RaceImage.Source = null;
         }
+        UpdateDescriptionText();
+    }
+
+    private void ProfessionPicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        UpdateDescriptionText();
     }
 
     private void Button_Clicked(object sender, EventArgs e)
     {
 		CreateAvatar();
+    }
+
+    protected override bool OnBackButtonPressed()
+    {
+        return false;
     }
 }

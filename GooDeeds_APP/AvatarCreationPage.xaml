@@ -3,37 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GooDeeds_APP.AvatarCreationPage"
              Title="AvatarCreationPage">
-    <VerticalStackLayout>
-        <Label 
+    <ScrollView>
+        <StackLayout Margin="20" VerticalOptions="FillAndExpand">
+            <Label 
             Text="Create your Avatar"
             VerticalOptions="Start"
             HorizontalOptions="Center" />
 
-        <Entry x:Name="uname"
-        Placeholder="Username"
-        MaxLength="32"
-        />
+            <Entry x:Name="uname"
+                Placeholder="Username"
+                MaxLength="32"/>
 
-        <Picker
+            <Picker
             Title="Race"
             ItemsSource="{Binding RaceList}"
             x:Name="RacePicker"
-            SelectedIndexChanged="RacePicker_SelectedIndexChanged"/>
+            SelectedIndexChanged="RacePicker_SelectedIndexChanged"
+            SelectedIndex="0"/>
 
-        <Picker
+            <Picker
             Title="Profession"
             ItemsSource="{Binding ProfessionList}"
-            x:Name="ProfessionPicker"/>
+            x:Name="ProfessionPicker"
+            SelectedIndexChanged="ProfessionPicker_SelectedIndexChanged"
+            SelectedIndex="0"/>
 
-        <Button Text="Create Character"
+            <Label FontSize="Caption" Margin="0,0,0,10">
+                Hint: It does not matter what kind of race and profession you choose. There are no advantages or disadvantages spread around these.
+            </Label>
+
+            <Button Text="Create Character"
                 Clicked="Button_Clicked"/>
-
-
-        <StackLayout Margin="20">
             <Image x:Name="RaceImage"
-                    Opacity="0"
-                    Margin="20"/>
+                           Opacity="0"
+                           Margin="20"/>
+            <Label x:Name="CharacterDescriptionText"/>
 
         </StackLayout>
-    </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

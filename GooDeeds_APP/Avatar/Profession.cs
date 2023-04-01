@@ -8,7 +8,7 @@ namespace GooDeeds_APP.Avatar
 {
     public enum ProfessionType
     {
-        Assassin,
+        Assassin = 1,
         Berserk,
         Cleric,
         Druid,
