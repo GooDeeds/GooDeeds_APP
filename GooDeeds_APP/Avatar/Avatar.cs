@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace GooDeeds_APP.Avatar
 {
     public delegate void AvatarQuestAddedToHistoryHandler();
+    public delegate void AvatarDataChangedHandler();
     /// <summary>
     /// This class defines everything needed in order for the App to work with the Avatar.
     /// Currently we only store the name, experience and profession of the Avatar.
@@ -16,9 +17,39 @@ namespace GooDeeds_APP.Avatar
     /// </summary>
     public class Avatar
     {
-        public string Name { get; set; }
-        public uint Experience { get; set; }
-        public Profession Profession { get; set; }
+        public event AvatarDataChangedHandler AvatarDataChanged;
+
+        private string _name = "";
+        private uint _experience = 0;
+        private Profession _profession = new Profession();
+
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                _name = value;
+                AvatarDataChanged?.Invoke();
+            }
+        }
+        public uint Experience
+        {
+            get => _experience;
+            set
+            {
+                _experience = value;
+                AvatarDataChanged?.Invoke();
+            }
+        }
+        public Profession Profession
+        {
+            get => _profession;
+            set
+            {
+                _profession = value;
+                AvatarDataChanged?.Invoke();
+            }
+        }
 
         public uint Level => AvatarManager.GetLevel(Experience);
 

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GooDeeds_APP.Share
+namespace GooDeeds_APP.ShareHelper
 {
     public static class ShareDeedGenerator
     {

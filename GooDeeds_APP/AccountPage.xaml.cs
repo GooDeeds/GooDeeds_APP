@@ -10,13 +10,20 @@ public partial class AccountPage : ContentPage
 		InitializeComponent();
         avatar = AvatarManager.LoadAvatar();
         avatar.QuestAddedToHistory += UpdateAvatarInformation;
-        SetPercentage(AvatarManager.GetLevelProgress(avatar.Experience));
-        GreetingsText.Text = "Greetings, " + avatar.Name + "!";
-        AvatarImage.Source = "avatar_race_" + (int)avatar.Profession.Race + ".svg";
+        avatar.AvatarDataChanged += UpdateAvatarInformation;
+        if (!string.IsNullOrEmpty(avatar.Name))
+        {
+            SetPercentage(AvatarManager.GetLevelProgress(avatar.Experience));
+            GreetingsText.Text = "Greetings, " + avatar.Name + "!";
+            AvatarImage.Source = "avatar_race_" + (int)avatar.Profession.Race + ".svg";
+        }
     }
 
     private void UpdateAvatarInformation()
     {
+        SetPercentage(AvatarManager.GetLevelProgress(avatar.Experience));
+        GreetingsText.Text = "Greetings, " + avatar.Name + "!";
+        AvatarImage.Source = "avatar_race_" + (int)avatar.Profession.Race + ".svg";
         SetPercentage(AvatarManager.GetLevelProgress(avatar.Experience));
     }
 
