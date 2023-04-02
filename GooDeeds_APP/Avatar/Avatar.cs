@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GooDeeds_APP.Achievements;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,7 +54,7 @@ namespace GooDeeds_APP.Avatar
 
         public uint Level => AvatarManager.GetLevel(Experience);
 
-        List<QuestHistoryEntry> QuestHistory { get; set; } = new List<QuestHistoryEntry>();
+        public List<QuestHistoryEntry> QuestHistory { get; set; } = new List<QuestHistoryEntry>();
         public void PopulateQuestHistory()
         {
             foreach (var quest in QuestHistory)
@@ -68,6 +69,23 @@ namespace GooDeeds_APP.Avatar
             QuestHistory.Add(quest);
             Experience += quest.EarnedExperience;
             QuestAddedToHistory?.Invoke();
+            AvatarManager.SaveAvatar(this);
+            AchievementManager.UpdateAvatarAchievements(this);
+        }
+
+        public List<AchievementEntry> Achievements { get; set; } = new List<AchievementEntry>();
+
+        public void AddAchievement(Achievement achievement)
+        {
+            if (Achievements.Any(a => a.AchievementId == achievement.Id))
+                return;
+
+            Achievements.Add(new AchievementEntry()
+            {
+                AchievementId = achievement.Id,
+                CompletedAt = DateTime.Now
+            });
+
             AvatarManager.SaveAvatar(this);
         }
     }

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GooDeeds_APP.AccountPage"
-             Title="AccountPage">
+             Title="Your account">
     <VerticalStackLayout>
        
 
@@ -24,16 +24,13 @@
             </Grid>
             <Button Clicked="Settings_Clicked"
                     Text="Settings"
-                    BackgroundColor="Beige"
                     Margin="0,0,0,10"/>
             <Button Clicked="HistoryButton_Clicked"
                     Text="Quest Histroy"
-                    BackgroundColor="Beige"
                     Margin="0,0,0,10"/>
-            <Button Opacity="0"
-                    Text="Achievements"
-                    BackgroundColor="Beige"
-                    Margin="0,0,0,10"/>
+            <Button Text="Achievements"
+                    Margin="0,0,0,10"
+                    Clicked="AchievementsButton_Clicked"/>
         </StackLayout>
     </VerticalStackLayout>
 </ContentPage>

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GooDeeds_APP.DeedDetailPage"
-             Title="DeedDetailPage">
+             Title="Deed Info">
     <StackLayout Margin="20">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -13,13 +13,12 @@
             <Label Grid.Column="1" x:Name="TitleText" FontSize="Large" FontAttributes="Bold"/>
         </Grid>
         <Label x:Name="DescriptionText"/>
-        <StackLayout BackgroundColor="LightGray" Margin="0,20" >
+        <StackLayout Margin="0,20" >
             <Label Text="Info-box title" FontAttributes="Bold" />
             <Label Text="Additional statistics" FontSize="Small" />
         </StackLayout>
         <Button x:Name="btn_Complete"
                     Text="Completed"
-                    BackgroundColor="Beige"
                     Clicked="btn_Complete_Clicked">
         </Button>
     </StackLayout>

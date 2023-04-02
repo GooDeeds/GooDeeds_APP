@@ -1,32 +1,40 @@
 ﻿using GooDeeds_APP.Download;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GooDeeds_APP.Achievements
 {
     public delegate void AchievementManagerDownloadErrorEventHandler(int statusCode, string errorMessage);
     public delegate void AchievementManagerDownloadSuccessventHandler();
     public delegate void AchievementManagerDownloadStartedHandler();
-    
+
+
+    // ID | description
+    // -------------------------------------------------------
+    // 1  | Complete a certain amount of deeds
+    // 2  | Complete a certain daily streak
+    // 3  | Reach a certain level
+
+    // Future ideas:
+    // 4  | Complete a volunteering deed
+    // 5  | Complete a donation deed
+    // 6  | Complete the blood donation deed
+    // 7  | Complete a event organization deed
+    // 8  | Share your completed deed
+    // 9  | Complete a certain amount of deeds in one day
+    // 10 | Complete a certain amount of deeds in one hour
+    // 11 | Create an account
+    // 12 | Do every deed at least once
+
+    public enum AchievementType
+    {
+        COMPLETE_DEED = 1,
+        COMPLETE_STREAK_DAY,
+        REACH_LEVEL
+    }
+
     public static class AchievementManager
     {
-        // ID description
-        // 1  - Complete a certain amount of deeds
-        // 2  - Complete a certain daily streak
-        // 3  - Reach a certain level
-        // 4  - Complete a volunteering deed
-        // 5  - Complete a donation deed
-        // 6  - Complete the blood donation deed
-        // 7  - Complete a event organization deed
-        // 8  - Share your completed deed
-        // 9  - Complete a certain amount of deeds in one day
-        // 10 - Complete a certain amount of deeds in one hour
-        // 11 - Create an account
-        // 12 - Do every deed at least once
+
 
         public static event AchievementManagerDownloadErrorEventHandler OnAchievementDownloadError;
         public static event AchievementManagerDownloadSuccessventHandler OnAchievementDownloadSuccess;
@@ -36,7 +44,7 @@ namespace GooDeeds_APP.Achievements
 
         public static bool AchievementExists => File.Exists(AchievementFileName);
 
-        public static List<Achievement> LoadAchievements()
+        public static List<Achievement> GetAchievements()
         {
             try
             {
@@ -84,7 +92,7 @@ namespace GooDeeds_APP.Achievements
                 };
 
                 OnAchievementDownloadStart?.Invoke();
-                await dh.StartDownload(API_Url + "/deed", AchievementFileName);
+                await dh.StartDownload(API_Url + "/achievement", AchievementFileName);
             }
             catch (Exception ex)
             {
@@ -108,6 +116,63 @@ namespace GooDeeds_APP.Achievements
             catch (Exception ex)
             {
                 return DateTime.MinValue;
+            }
+        }
+
+
+        public static void UpdateAvatarAchievements(Avatar.Avatar avatar)
+        {
+            var achievements = GetAchievements();
+            var deedHistory = avatar.QuestHistory;
+
+            int longestStreak = 0;
+            int currentStreak = 0;
+            DateTime LastDeedTime = DateTime.MinValue;
+            foreach (var deed in deedHistory)
+            {
+                if (LastDeedTime.Day != deed.CompletedAt.Day)
+                {
+                    if ((LastDeedTime - deed.CompletedAt).TotalDays < 1)
+                        currentStreak++;
+                    else if (longestStreak < currentStreak)
+                    {
+                        longestStreak = currentStreak;
+                        currentStreak = 0;
+                    }
+                }
+
+                LastDeedTime = deed.CompletedAt;
+                if (longestStreak < currentStreak)
+                {
+                    longestStreak = currentStreak;
+                }
+            }
+
+            foreach (var achievement in achievements.Where(c => !avatar.Achievements.Any(x => x.AchievementId == c.Id)))
+            {
+                switch (achievement.Type)
+                {
+                    case AchievementType.COMPLETE_STREAK_DAY:
+                        {
+                            if (longestStreak >= achievement.Value)
+                                avatar.AddAchievement(achievement);
+                            break;
+                        }
+                    case AchievementType.COMPLETE_DEED:
+                        {
+                            if(deedHistory.Count >= achievement.Value)
+                                avatar.AddAchievement(achievement);
+                            break;
+                        }
+                    case AchievementType.REACH_LEVEL:
+                        {
+                            if (avatar.Level >= achievement.Value)
+                                avatar.AddAchievement(achievement);
+                            break;
+                        }
+                    default:
+                        break;
+                }
             }
         }
     }

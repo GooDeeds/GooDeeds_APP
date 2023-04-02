@@ -38,6 +38,7 @@ namespace GooDeeds_APP.Avatar
             try
             {
                 File.WriteAllText(AvatarFileName, JsonConvert.SerializeObject(avatar));
+                _cachedAvatar = avatar;
             }
             catch (Exception ex)
             {

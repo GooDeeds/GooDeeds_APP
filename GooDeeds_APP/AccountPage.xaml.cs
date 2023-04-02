@@ -45,8 +45,21 @@ public partial class AccountPage : ContentPage
 
     }
 
-    private void HistoryButton_Clicked(object sender, EventArgs e)
+    private async void HistoryButton_Clicked(object sender, EventArgs e)
     {
+        if (Parent is TabbedPage tp && tp.Parent is NavigationPage np)
+        {
+            DeedHistoryPage dhp = new DeedHistoryPage();
+            await np.PushAsync(dhp);
+        }
+    }
 
+    private async void AchievementsButton_Clicked(object sender, EventArgs e)
+    {
+        if (Parent is TabbedPage tp && tp.Parent is NavigationPage np)
+        {
+            AccountAchievementsPage aap = new AccountAchievementsPage();
+            await np.PushAsync(aap);
+        }
     }
 }

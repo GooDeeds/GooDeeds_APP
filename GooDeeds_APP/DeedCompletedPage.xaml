@@ -22,6 +22,6 @@
                 <Label x:Name="LevelText" Grid.Row="0" Grid.Column="0" Text="Level 1" HorizontalOptions="StartAndExpand"/>
             </Grid>
         </StackLayout>
-        <ImageButton BackgroundColor="White" Source="share.svg" HeightRequest="50" WidthRequest="50" Margin="0,0,0,20" Clicked="ImageButton_Clicked"/>
+        <ImageButton Source="share.svg" HeightRequest="50" WidthRequest="50" Margin="0,0,0,20" Clicked="ImageButton_Clicked"/>
     </VerticalStackLayout>
 </ContentPage>

@@ -43,13 +43,10 @@ public partial class AvatarCreationPage : ContentPage
 			Race = (Avatar.RaceType)(RacePicker.SelectedIndex + 1),
 		};
 
-		avatar = new Avatar.Avatar()
-		{
-            Profession = profession,
-			Name = uname.Text,
-			Experience = 0,
-		};
-        
+        avatar = AvatarManager.LoadAvatar();
+        avatar.Name = uname.Text;
+        avatar.Profession = profession;
+
         Avatar.AvatarManager.SaveAvatar(avatar);
         App.UpdateMainPage();
     }
