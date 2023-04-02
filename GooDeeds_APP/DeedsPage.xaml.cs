@@ -1,3 +1,4 @@
+using GooDeeds_APP.Achievements;
 using GooDeeds_APP.Deeds;
 using Microsoft.Extensions.Configuration;
 using Plugin.LocalNotification;
@@ -53,12 +54,13 @@ public partial class DeedPage : ContentPage
         }
     }
 
-    private void InitializeDeedDownload(string API_Url)
+    private void InitializeDataDownload(string API_Url)
     {
         new Thread(async () =>
         {
             Thread.Sleep(2000);
             await DeedManager.UpdateDeeds(API_Url);
+            await AchievementManager.UpdateAchievements(API_Url);
         }).Start();
     }
 
@@ -189,7 +191,7 @@ public partial class DeedPage : ContentPage
         if (Parent is MainPage mp)
         {
             var Settings = mp.config.GetRequiredSection("Settings").Get<Settings>();
-            InitializeDeedDownload(Settings.API_Server_URL);
+            InitializeDataDownload(Settings.API_Server_URL);
         }
     }
 

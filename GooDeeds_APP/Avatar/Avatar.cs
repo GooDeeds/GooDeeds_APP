@@ -68,6 +68,7 @@ namespace GooDeeds_APP.Avatar
             QuestHistory.Add(quest);
             Experience += quest.EarnedExperience;
             QuestAddedToHistory?.Invoke();
+            AvatarManager.SaveAvatar(this);
         }
     }
 }

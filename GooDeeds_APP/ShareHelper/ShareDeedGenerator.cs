@@ -28,7 +28,7 @@ namespace GooDeeds_APP.ShareHelper
 
 Your fellow GooDeed user, {avatarName}, a {avatarRace} {avatarProfession}, has just completed an incredible deed that we want to share with you. {deedTitle} is a {GetRandomAdjective(0)}, {GetRandomAdjective(1)}, and {GetRandomAdjective(2)} accomplishment that {avatarName} can be proud of.
 
-{avatarName}'s deed involved {GetRandomVerb(0)} {GetRandomAdjective(3)} {GetRandomNoun(0)} by {GetRandomVerb(1)} {GetRandomAdjective(4)} {GetRandomNoun(1)}, which is truly inspiring. It takes generosity, compassion, and {GetRandomAdjective(5)} to make a difference in someone's life.
+{avatarName}'s deed involved {GetRandomVerb(0)} {GetRandomAdjective(3)} {GetRandomNoun(0)} by {GetRandomVerb(1)} {GetRandomAdjective(4)} {GetRandomNoun(1)}, which is truly inspiring. It takes generosity and compassion to make a difference in someone's life.
 
 But {avatarName} didn't stop there. They went on to {GetRandomVerb(2)} {GetRandomAdjective(6)} {GetRandomNoun(2)} and {GetRandomVerb(3)} {GetRandomAdjective(7)} {GetRandomNoun(3)}, showing that they are truly committed to making the world a better place.
 
@@ -54,7 +54,7 @@ The GooDeed Team";
 
 Your fellow GooDeed user, {avatar.Name}, a {avatar.Profession.Race} {avatar.Profession.Type}, has just completed an incredible deed that we want to share with you. {deedTitle} is a {GetRandomAdjective(0)}, {GetRandomAdjective(1)}, and {GetRandomAdjective(2)} accomplishment that {avatar.Name} can be proud of.
 
-{avatar.Name}'s deed involved {GetRandomVerb(0)} {GetRandomAdjective(3)} {GetRandomNoun(0)} by {GetRandomVerb(1)} {GetRandomAdjective(4)} {GetRandomNoun(1)}, which is truly inspiring. It takes generosity, compassion, and {GetRandomAdjective(5)} to make a difference in someone's life.
+{avatar.Name}'s deed involved {GetRandomVerb(0)} {GetRandomAdjective(3)} {GetRandomNoun(0)} by {GetRandomVerb(1)} {GetRandomAdjective(4)} {GetRandomNoun(1)}, which is truly inspiring. It takes generosity and compassion to make a difference in someone's life.
 
 But {avatar.Name} didn't stop there. They went on to {GetRandomVerb(2)} {GetRandomAdjective(6)} {GetRandomNoun(2)} and {GetRandomVerb(3)} {GetRandomAdjective(7)} {GetRandomNoun(3)}, showing that they are truly committed to making the world a better place.
 
@@ -69,11 +69,11 @@ The GooDeed Team";
 
 Your fellow GooDeed user, {avatar.Name}, a {avatar.Profession.Race} {avatar.Profession.Type}, has just completed an incredible deed that we want to share with you. '{d.Title}' is a {GetRandomAdjective(0)}, {GetRandomAdjective(1)}, and {GetRandomAdjective(2)} accomplishment that {avatar.Name} can be proud of.
 
-{avatar.Name}'s deed involved {GetRandomVerb(0)} {GetRandomAdjective(3)} {GetRandomNoun(0)} by {GetRandomVerb(1)} {GetRandomAdjective(4)} {GetRandomNoun(1)}, which is truly inspiring. It takes generosity, compassion, and {GetRandomAdjective(5)} to make a difference in someone's life.
+{avatar.Name}'s deed involved {GetRandomVerb(0)} {GetRandomAdjective(3)} {GetRandomNoun(0)} by {GetRandomVerb(1)} {GetRandomAdjective(4)} {GetRandomNoun(1)}, which is truly inspiring.
 
 But {avatar.Name} didn't stop there. They went on to {GetRandomVerb(2)} {GetRandomAdjective(6)} {GetRandomNoun(2)} and {GetRandomVerb(3)} {GetRandomAdjective(7)} {GetRandomNoun(3)}, showing that they are truly committed to making the world a better place.
 
-We hope that {avatar.Name}'s story motivates you to take action and {d.Description}. Remember, every {GetRandomNoun(4)}, no matter how small, can make a big impact in the lives of those in need.
+We hope that {avatar.Name}'s story motivates you to take action and {d.Description}.
 
 Yours in good deeds,
 The GooDeed Team";
@@ -84,7 +84,7 @@ The GooDeed Team";
 
 Your fellow GooDeed user, {avatar.Name}, a {avatar.Profession.Race} {avatar.Profession.Type}, has just completed an incredible deed that we want to share with you. {d.Title} is a {GetRandomAdjective(0)}, {GetRandomAdjective(1)}, and {GetRandomAdjective(2)} accomplishment that {avatar.Name} can be proud of.
 
-{avatar.Name}'s deed involved {GetRandomVerb(0)} {GetRandomAdjective(3)} {GetRandomNoun(0)} by {GetRandomVerb(1)} {GetRandomAdjective(4)} {GetRandomNoun(1)}, which is truly inspiring. It takes bravery, kindness, and {GetRandomAdjective(5)} to give a part of yourself to help someone else.
+{avatar.Name}'s deed involved {GetRandomVerb(0)} {GetRandomAdjective(3)} {GetRandomNoun(0)} by {GetRandomVerb(1)} {GetRandomAdjective(4)} {GetRandomNoun(1)}, which is truly inspiring. It takes bravery and kindness to give a part of yourself to help someone else.
 
 But {avatar.Name} didn't stop there. They went on to {GetRandomVerb(2)} {GetRandomAdjective(6)} {GetRandomNoun(2)} and {GetRandomVerb(3)} {GetRandomAdjective(7)} {GetRandomNoun(3)}, showing that they are truly committed to making the world a better place.
 
@@ -99,7 +99,7 @@ The GooDeed Team";
 
 Your fellow GooDeed user, {avatar.Name}, a {avatar.Profession.Race} {avatar.Profession.Type}, has just completed an incredible deed that we want to share with you. '{d.Title}' is a {GetRandomAdjective(0)}, {GetRandomAdjective(1)}, and {GetRandomAdjective(2)} accomplishment that {avatar.Name} can be proud of.
 
-{avatar.Name}'s deed involved {GetRandomVerb(0)} {GetRandomAdjective(3)} {GetRandomNoun(0)} by {GetRandomVerb(1)} {GetRandomAdjective(4)} {GetRandomNoun(1)}, which is truly inspiring. It takes generosity, compassion, and {GetRandomAdjective(5)} to make a difference in someone's life.
+{avatar.Name}'s deed involved {GetRandomVerb(0)} {GetRandomAdjective(3)} {GetRandomNoun(0)} by {GetRandomVerb(1)} {GetRandomAdjective(4)} {GetRandomNoun(1)}, which is truly inspiring. It takes generosity and compassion to make a difference in someone's life.
 
 But {avatar.Name} didn't stop there. They went on to {GetRandomVerb(2)} {GetRandomAdjective(6)} {GetRandomNoun(2)} and {GetRandomVerb(3)} {GetRandomAdjective(7)} {GetRandomNoun(3)}, showing that they are truly committed to making the world a better place.
 
@@ -114,7 +114,7 @@ The GooDeed Team";
 
 Your fellow GooDeed user, {avatar.Name}, a {avatar.Profession.Race} {avatar.Profession.Type}, has just completed an incredible deed that we want to share with you. '{d.Title}' is a {GetRandomAdjective(0)}, {GetRandomAdjective(1)}, and {GetRandomAdjective(2)} accomplishment that {avatar.Name} can be proud of.
 
-{avatar.Name}'s deed involved {GetRandomVerb(0)} {GetRandomAdjective(3)} {GetRandomNoun(0)} by {GetRandomVerb(1)} {GetRandomAdjective(4)} {GetRandomNoun(1)}, which is truly inspiring. It takes patience, kindness, and {GetRandomAdjective(5)} to make a difference in the lives of these furry friends.
+{avatar.Name}'s deed involved {GetRandomVerb(0)} {GetRandomAdjective(3)} {GetRandomNoun(0)} by {GetRandomVerb(1)} {GetRandomAdjective(4)} {GetRandomNoun(1)}, which is truly inspiring. It takes patience and kindness to make a difference in the lives of these furry friends.
 
 But {avatar.Name} didn't stop there. They went on to {GetRandomVerb(2)} {GetRandomAdjective(6)} {GetRandomNoun(2)} and {GetRandomVerb(3)} {GetRandomAdjective(7)} {GetRandomNoun(3)}, showing that they are truly committed to making the world a better place.
 
@@ -150,7 +150,7 @@ The GooDeed Team";
         }
         private static string GetRandomNoun(int index)
         {
-            return Nouns[index][new Random().Next(0, 5)];
+            return Nouns[index][new Random().Next(0,5)];
         }
         
         static List<List<String>> Adjectives = new List<List<string>>
@@ -238,6 +238,14 @@ The GooDeed Team";
                 "renewing",
                 "refurbishing",
                 "revitalizing"
+            },
+            new List<string>
+            {
+                "caring for",
+                "nurturing",
+                "cultivating",
+                "developing",
+                "supporting"
             },
             new List<string>
             {

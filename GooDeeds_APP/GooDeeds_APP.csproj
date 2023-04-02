@@ -53,6 +53,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Achievements\json" />
 	  <None Remove="Achievements\NewFile1.txt" />
 	  <None Remove="appsettings.json" />
 	  <None Remove="NewFile1.txt" />
@@ -91,10 +92,6 @@
 	  <MauiXaml Update="IntroductionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Achievements\" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -32,6 +32,7 @@ public partial class DeedDetailPage : ContentPage
 
         if (Parent is NavigationPage np)
         {
+            await np.PopAsync();
             DeedCompletedPage dcp = new DeedCompletedPage(Deed);
             await np.PushAsync(dcp);
         }

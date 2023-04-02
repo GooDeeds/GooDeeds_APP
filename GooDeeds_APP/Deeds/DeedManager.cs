@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GooDeeds_APP.Download;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,25 +35,21 @@ namespace GooDeeds_APP.Deeds
             try
             {
                 OnDeedDownloadStart?.Invoke();
-                HttpClient client = new HttpClient();
-                HttpResponseMessage message = await client.GetAsync(API_Url + "/deed");
 
-                // Handle the erros which can happen. Usually the UI wants to display it. You can register an event to it.
-                // We do not continue executing if something went wrong.
-                if (!message.IsSuccessStatusCode)
-                {
-                    // Invoke (call the event) if it got registered somewhere!
-                    OnDeedDownloadError?.Invoke((int)message.StatusCode, message.ReasonPhrase);
-                }
-                else
-                {
-                    // Read the returned json and save it into a local file.
-                    string JSON_Data = await message.Content.ReadAsStringAsync();
-                    File.WriteAllText(DeedsFileName, JSON_Data);
+                DownloadHelper dh = new DownloadHelper();
 
-                    // If something hooked to the event, call it!
+                dh.OnDownloadError += (errorCode, statusText) =>
+                {
+                    OnDeedDownloadError?.Invoke(errorCode, statusText);
+                };
+
+                dh.OnDownloadSuccess += () =>
+                {
                     OnDeedDownloadSuccess?.Invoke();
-                }
+                };
+
+                OnDeedDownloadStart?.Invoke();
+                await dh.StartDownload(API_Url + "/deed", DeedsFileName);
             } catch(Exception ex)
             {
                 OnDeedDownloadError?.Invoke(-100, "Something went totally wrong!");
