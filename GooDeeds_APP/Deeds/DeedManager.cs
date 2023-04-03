@@ -13,6 +13,10 @@ namespace GooDeeds_APP.Deeds
     public delegate void DeedManagerDownloadSuccessventHandler();
     public delegate void DeedManagerDownloadStartedHandler();
 
+    /// <summary>
+    /// The deed Manager is, as the <see cref="Avatar.AvatarManager"/> and the <see cref="Achievements.AchievementManager"/>, a managing class.
+    /// In here is a lot of functionality to manage the deeds. (Download, Store)
+    /// </summary>
     public static class DeedManager
     {
         public static event DeedManagerDownloadErrorEventHandler OnDeedDownloadError;

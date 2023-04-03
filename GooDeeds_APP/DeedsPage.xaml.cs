@@ -156,7 +156,9 @@ public partial class DeedPage : ContentPage
 #if ANDROID || IOS
 
         var cDT = DateTime.Now;
-
+        DateTime NotifyTime = new DateTime(cDT.Year, cDT.Month, cDT.Day, 12, 00, 0);
+        if (NotifyTime < cDT)
+            NotifyTime = NotifyTime.AddDays(1);
         var request = new NotificationRequest
         {
             NotificationId = 1000,
@@ -166,7 +168,7 @@ public partial class DeedPage : ContentPage
             BadgeNumber = 42,
             Schedule = new NotificationRequestSchedule
             {
-                NotifyTime = new DateTime(cDT.Year, cDT.Month, cDT.Day, 12, 00, 0).AddDays(1),
+                NotifyTime = NotifyTime,
                 NotifyRepeatInterval = TimeSpan.FromHours(24),
                 RepeatType = NotificationRepeat.TimeInterval
             }

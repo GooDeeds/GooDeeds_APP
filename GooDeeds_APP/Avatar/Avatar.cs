@@ -9,17 +9,23 @@ namespace GooDeeds_APP.Avatar
 {
     public delegate void AvatarQuestAddedToHistoryHandler();
     public delegate void AvatarDataChangedHandler();
+
     /// <summary>
     /// This class defines everything needed in order for the App to work with the Avatar.
-    /// Currently we only store the name, experience and profession of the Avatar.
-    /// In the future we might want to add more properties to this class.
-    /// Such as: achievement, titles (unlocked with achievements).
-    /// Just imagine you can get called "Grimjaw, The unbreakable Dward Warrior".
+    /// The Avatar gets Serialized (and obviously deserialized at some point again) into a json-formatted string.
+    /// The serialization serialize every public field and property (with the exception of static fields and properties and private/protected getter).
+    /// This string than gets stored into a file.
     /// </summary>
     public class Avatar
     {
+        #region events
         public event AvatarDataChangedHandler AvatarDataChanged;
+        public event AvatarQuestAddedToHistoryHandler QuestAddedToHistory;
+        #endregion
 
+        // The following fields are private. A representing public property is wrapping around them.
+        // Such fields are called "backing fields". (They backup the public property)
+        // We use that procedure to call the event "AvatarDataChanged" whenever the value of the property changes (which is really helpful for the UI)
         private string _name = "";
         private uint _experience = 0;
         private Profession _profession = new Profession();
@@ -52,8 +58,11 @@ namespace GooDeeds_APP.Avatar
             }
         }
 
+        // A readonly property to get the Level of the Avatar.
         public uint Level => AvatarManager.GetLevel(Experience);
 
+        // The QuestHistory is initialized with an empty list.
+        // Otherwise a new Character would have a null-object as QuestHistory (and thus might cause confusion later).
         public List<QuestHistoryEntry> QuestHistory { get; set; } = new List<QuestHistoryEntry>();
         public void PopulateQuestHistory()
         {
@@ -62,8 +71,7 @@ namespace GooDeeds_APP.Avatar
                 Experience += quest.EarnedExperience;
             }
         }
-
-        public event AvatarQuestAddedToHistoryHandler QuestAddedToHistory;
+        
         public void AddQuestToHistory(QuestHistoryEntry quest)
         {
             QuestHistory.Add(quest);
@@ -73,6 +81,7 @@ namespace GooDeeds_APP.Avatar
             AchievementManager.UpdateAvatarAchievements(this);
         }
 
+        // The same thing as with the QuestHistory applies to the 
         public List<AchievementEntry> Achievements { get; set; } = new List<AchievementEntry>();
 
         public void AddAchievement(Achievement achievement)

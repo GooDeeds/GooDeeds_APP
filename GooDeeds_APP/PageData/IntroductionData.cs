@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace GooDeeds_APP.PageData
 {
+    /// <summary>
+    /// This little class is used to store the introduction data.
+    /// This data gets used as a Template-class for the introduction-page.
+    /// </summary>
     public class IntroductionData
     {
         public string Title { get; set; }

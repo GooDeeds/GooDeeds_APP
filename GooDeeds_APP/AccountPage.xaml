@@ -24,7 +24,8 @@
             </Grid>
             <Button Clicked="Settings_Clicked"
                     Text="Settings"
-                    Margin="0,0,0,10"/>
+                    Margin="0,0,0,10"
+                    IsVisible="false"/>
             <Button Clicked="HistoryButton_Clicked"
                     Text="Quest Histroy"
                     Margin="0,0,0,10"/>

@@ -8,9 +8,13 @@ using System.Threading.Tasks;
 
 namespace GooDeeds_APP.ShareHelper
 {
+    /// <summary>
+    /// The ShareDeedGenerator is used to generate some random texts to share.
+    /// It is ment more or less as a proof of concept rather than an actual good working generator.
+    /// (We might need to improve that!)
+    /// </summary>
     public static class ShareDeedGenerator
     {
-        
         public static string GenerateDeedText(Deed d)
         {
             string text = "";

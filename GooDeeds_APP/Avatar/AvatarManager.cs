@@ -94,7 +94,7 @@ namespace GooDeeds_APP.Avatar
             return sb.ToString();
         }
 
-        public const uint BaseExperience = 150;
+        public const uint BaseExperience = 50;
         public const double GrowthRate = 1.5;
         public static uint GetNeededExperience(uint level)
         {
